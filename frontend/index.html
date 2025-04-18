@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Storage Optimization</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>储能收益优化</h1>
+            <p>计算最优充放电时段以获取最大收益</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="upload-area" id="dropZone">
+                    <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden>
+                    <div class="upload-content">
+                        <img src="/static/upload-icon.svg" alt="Upload" class="upload-icon">
+                        <p>拖拽文件到此处或</p>
+                        <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                            浏览文件
+                        </button>
+                        <p class="file-info" id="fileInfo"></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="strategy-section">
+                <h2>选择策略</h2>
+                <div class="strategy-options">
+                    <label class="strategy-option">
+                        <input type="radio" name="strategy" value="one_charge_one_discharge" checked>
+                        一充一放
+                    </label>
+                    <label class="strategy-option">
+                        <input type="radio" name="strategy" value="two_charge_two_discharge">
+                        两充两放
+                    </label>
+                </div>
+                <button class="calculate-btn" id="calculateBtn" disabled>
+                    计算收益
+                </button>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>计算结果</h2>
+                <div class="total-profit">
+                    <h3>月度总收益</h3>
+                    <p class="profit-amount" id="totalProfit">$0.00 AUD</p>
+                </div>
+                
+                <div class="charts">
+                    <div id="priceChart"></div>
+                    <div id="profitChart"></div>
+                </div>
+
+                <div class="daily-results">
+                    <h3>每日收益明细</h3>
+                    <table id="dailyResults">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>充电时段</th>
+                                <th>充电均价</th>
+                                <th>放电时段</th>
+                                <th>放电均价</th>
+                                <th>收益 (AUD)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html> 
